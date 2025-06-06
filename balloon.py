@@ -62,6 +62,19 @@ def update():
         house.x = randint(800, 1600)
         sum += 1
 
+    if tree.right > 0:
+        tree.x -= 2
+
+    else:
+        tree.x = randint(800, 1600)
+        sum += 1
+
+    if balloon.collidepoint(bird.x, bird.y) or \
+       balloon.collidepoint(house.x, house.y) or \
+       balloon.collidepoint(tree.x, tree.y):
+       game_over = True
+       update_record()
+
 
 
 def on_mouse_down():
