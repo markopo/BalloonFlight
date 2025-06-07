@@ -1,3 +1,5 @@
+from fileinput import filename
+
 import pgzrun
 from random import randint
 
@@ -87,10 +89,31 @@ def on_mouse_up():
     up = False
 
 def update_record():
-    pass
+    global sum, sums
+    file_name = "Record.txt"
+    sums = []
+    with open(file_name, "r") as file:
+        row = file.readline()
+        record = row.split()
+        for r in record:
+            if sum > int(r):
+                sums.append(str(sum) + " ")
+                sum = int(r)
+            else:
+                sums.append(str(r) + " ")
+
+    with open(file_name, "w") as f:
+        for record in sums:
+            f.write(record)
 
 def show_record():
-    pass
+    screen.draw.text("RECORD", (350, 150), color="black")
+    y = 175
+    position = 1
+    for record in sums:
+        screen.draw.text(str(position) + ". " + record, (350, y), color="black")
+        y += 25
+        position += 1
 
 def flap():
     global bird_up
